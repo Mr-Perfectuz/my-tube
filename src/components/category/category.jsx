@@ -4,7 +4,6 @@ import { colors } from '../utils/colors'
 import { category } from '../utils'
 
 const Category = ({ selectedCategoryHandler, selectedCategory }) => {
-  console.log(category, 'categorySection')
   return (
     <Stack direction={'row'} sx={{ overflowX: 'scroll' }}>
       {
