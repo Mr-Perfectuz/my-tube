@@ -7,12 +7,25 @@ import { ApiService } from '../../service/apiService';
 const Main = () => {
   const [selectedCategory, setSelectedCategory] = useState('New');
 
+  const [videos, setVideos] = useState([])
+
   const selectedCategoryHandler = category => setSelectedCategory(category);
 
   useEffect(() => {
-    const data = ApiService.fetching('search').then(data => console.log(data.items(c => c)));
+    const getData = async () => {
+      try {
+        const data = await ApiService.fetching('search')
+        setVideos(data.items)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getData()
   }, [])
+
+  // console.log(videos.items, 'videos.items')
   return (
+
     <Stack style={{ display: 'flex', alignItems: 'center' }}>
       <Category
         selectedCategoryHandler={selectedCategoryHandler}
@@ -23,7 +36,7 @@ const Main = () => {
           {selectedCategory}
           <span style={{ color: colors.secondary }}> videos</span>
         </Typography>
-        <Videos />
+        <Videos videos={videos} />
       </Container>
 
 
